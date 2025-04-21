@@ -1,0 +1,27 @@
+<div class="create-account-container flex p-6 w-full h-full justify-center items-center">
+    <div class="container flex gap-8">
+        <div class="left-section flex flex-col flex-1 gap-y-4">
+            <h1 class="text-[72px] font-bold">Take Control of <span class="text-customHsl-accent">Your Money</span></h1>
+            <p class="text-2xl">Create an account to get started</p>
+            <form [formGroup]="accountForm" (ngSubmit)="createAccount()" class="flex flex-col gap-y-4 max-w-sm mt-10">
+                <app-input-field
+                  placeholder="Enter your name"
+                  type="text"
+                  [value]="accountForm.get('name')?.value"
+                  (valueChange)="accountForm.get('name')?.setValue($event)"
+                ></app-input-field>
+              
+              
+                <app-button
+                  text="Create Account"
+                  color="primary"
+                  [disabled]="accountForm.invalid"
+                  (clicked)="createAccount()"
+                ></app-button>
+              </form>
+        </div>
+        <div class="right-section flex-1">
+            <img src="assets/budgeting_set_2.jpg" alt="">
+        </div>
+    </div>
+</div>
