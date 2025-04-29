@@ -7,6 +7,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
@@ -18,7 +20,11 @@ import {
 export class CreateAccountComponent implements OnInit {
   accountForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.accountForm = this.fb.group({
@@ -27,8 +33,7 @@ export class CreateAccountComponent implements OnInit {
   }
 
   createAccount() {
-    if (this.accountForm.valid) {
-      console.log(this.accountForm.value);
-    }
+    this.userService.addUser(this.accountForm.value.name);
+    this.router.navigate(['/home']);
   }
 }
